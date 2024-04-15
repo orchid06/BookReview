@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\User\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,8 @@ Route::prefix('user')->name('user.')->group(function(){
 
     Route::middleware('auth')->group(function(){
 
-        Route::get('/home', [UserController::class, 'index'])->name('index');
+        Route::get('/home',     [UserController::class, 'index'])->name('index');
+        Route::get('/logout',   [UserController::class, 'logout'])->name('logout');
     });
 
 });

@@ -27,6 +27,7 @@
         "></div>
 
         <div class="container">
+            
             <div class="row justify-content-center align-items-center" style="height: 60vh;">
                 <div class="card col-lg-6 mx-8 mx-md-4 shadow-5-strong" style="
                                                                         margin-top: -350px;
@@ -34,30 +35,23 @@
                                                                         backdrop-filter: blur(30px);
                                                                         ">
                     <div class="card-body py-5 px-md-5">
-
+                        @include('includes.alerts')
                         <div class="row d-flex justify-content-center">
                             <div class="col-lg-11">
                                 <h2 class="fw-bold mb-5">Log in</h2>
-                                <form>
+                                <form action="{{route('user.check')}}" method="POST">
+                                    @csrf
                                     <!-- Email input -->
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form3Example3" class="form-control" />
-                                        <label class="form-label" for="form3Example3">Email address</label>
+                                        <input type="email" id="email" name="email" class="form-control" />
+                                        <label class="form-label" for="email">Email address</label>
                                     </div>
 
                                     <!-- Password input -->
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="form3Example4" class="form-control" />
-                                        <label class="form-label" for="form3Example4">Password</label>
+                                        <input type="password" id="password" name="password" class="form-control" />
+                                        <label class="form-label" for="password">Password</label>
                                     </div>
-
-
-                                    <!-- <div class="form-check d-flex justify-content-center mb-4">
-                                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                                        <label class="form-check-label" for="form2Example33">
-                                            Subscribe to our newsletter
-                                        </label>
-                                    </div> -->
 
                                     <!-- Submit button -->
                                     <button type="submit" class="btn btn-primary btn-block mb-4">

@@ -1,0 +1,20 @@
+.blur {
+    margin-top: -300px;
+    background: hsla(0, 6%, 31%, 0.2);
+    backdrop-filter: blur(5px);
+}
+.navbar-brand, .nav-link, .dropdown-item{
+    color: white;  
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #cccccc;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
+    background: hsla(0, 5%, 28%, 0.489);
+    backdrop-filter: blur(5px);
+}

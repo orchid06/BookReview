@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -48,18 +49,42 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'You are now registered successfully');
     }
 
+    // public function check(Request $request): RedirectResponse
+    // {
+    //     $request->validate([
+    //         'email'    => 'required|email|exists:users,email',
+    //         'password' => 'required|min:5|max:30'
+    //     ], [
+    //         'email.exists' => 'This email is not exists on user table'
+    //     ]);
+
+    //     return   Auth::guard('web')->attempt($request->only('email', 'password'))
+    //         ? redirect()->route('user.index')->with('success', 'you are logged in')
+    //         : redirect()->route('user.login')->with('fail', 'Incorrect credentials');
+    // }
+
     public function check(Request $request): RedirectResponse
     {
         $request->validate([
             'email'    => 'required|email|exists:users,email',
             'password' => 'required|min:5|max:30'
         ], [
-            'email.exists' => 'This email is not exists on user table'
+            'email.exists' => 'This email does not exist in the user table'
         ]);
 
-        return   Auth::guard('web')->attempt($request->only('email', 'password'))
-            ? redirect()->route('user.index')->with('success', 'you are logged in')
-            : redirect()->route('user.login')->with('fail', 'Incorrect credentials');
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            return redirect()->route('user.index')->with('success', 'You are logged in');
+        }
+
+        return redirect()->route('user.login')->with('fail', 'Incorrect credentials');
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+        return back();
     }
 }
-
